@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container"> 
-        <table class="table">
+        <table class="table table-bordered">
             <h2 class="text-center">Data Buku</h2>
                 <thead class="text-center">
                     <tr>
