@@ -10,7 +10,6 @@
     <div class="container mt-5"> 
         <table class="table table-bordered">
             <h2 class="text-center">Data Buku</h2><br>
-            <img src="bulan.jpg" class="img-thumbnail" alt="Buku">
                 <thead class="text-center">
                     <tr>
                         <th scope="col">ISBN</th>
