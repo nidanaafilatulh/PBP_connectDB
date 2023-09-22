@@ -65,7 +65,7 @@
         </section>
 
         <section class="customer-reviews mt-5">
-            <h2>Ulasan Pelanggan</h2>
+            <h2>Ulasan</h2>
             <div class="review mb-3">
                 <div class="d-flex align-items-center">
                     <img src="ariana.jpeg" alt="Foto Profil" class="mr-3 rounded-circle" style="width: 50px;">
