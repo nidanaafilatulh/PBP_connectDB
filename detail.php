@@ -38,7 +38,6 @@
                             <td>PENERBIT SABAK GRIP</td>
                         </tr>
                     </table>
-                    <button class="btn btn-primary">Tambah ke Keranjang</button>
                 </div>
             </div>
             <div class="row mt-4">
