@@ -69,7 +69,7 @@
             <div class="review mb-3">
                 <div class="d-flex align-items-center">
                     <img src="ariana.jpeg" alt="Foto Profil" class="mr-3 rounded-circle" style="width: 50px;">
-                    <div>
+                    <div class="ms-3">
                         <h3 class="h6 mb-0">Hana Shabrina</h3>
                         <p class="mb-0">Bukunya sangat bagus!</p>
                         <div class="rating">⭐⭐⭐⭐⭐</div>
