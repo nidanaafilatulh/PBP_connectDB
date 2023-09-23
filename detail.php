@@ -1,64 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Detail Buku</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
+<?php 
+    include('./header.php');
+    require_once('./lib/db_login.php');
+
+    $isbn = $_GET['isbn'];
+
+    if (!isset($_POST["submit"])) {
+        $query = "SELECT books.isbn, books.title, books.author, books.category, books.price, book_reviews.review, book_reviews.jml_halaman, book_reviews.tgl_terbit, book_reviews.penerbit, book_reviews.img_url FROM books LEFT JOIN book_reviews ON books.isbn = book_reviews.isbn WHERE books.isbn='$isbn'";
+        $result = $db->query($query);
+        if(!$result) {
+            die("Could not query the database: <br />".$db->error);
+        } else {
+            while($row = $result->fetch_object()){
+                $isbn = $row->isbn;
+                $title = $row->title;
+                $category = $row->category;
+                $author = $row->author;
+                $price = $row->price;
+                $review = $row->review;
+                $jml_halaman = $row->jml_halaman;
+                $tgl_terbit = $row->tgl_terbit;
+                $penerbit = $row->penerbit;
+                $img_url = $row->img_url;
+            }
+        }
+        
+    
+    }
+?>
+
+
 <body>
-    <main class="container mt-5">
+    <main class="container mt-5 w-75" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) . '?isbn=' . $isbn ?>">
+        <div class="container d-flex align-items-center align-center">
+            <a href="view_book.php" class="btn btn-primary">Kembali</a>
+            <p class="">Detail Buku </p>
+        </div>
+        
         <section class="book-details">
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="bulan.jpg" alt="Judul Buku" class="img-thumbnail">
+            <div class="row ">
+                <div class="col-md-3">
+                    <img src="<?php  echo $img_url ?>" alt="Judul Buku" class="img-thumbnail rounded">
                 </div>
                 <div class="col-md-8">
-                    <h1 class="display-4 font-weight-bold">Bulan</h1>
-                    <p class="lead">Tere Liye</p>
+                    <h1 class="display-4 font-weight-bold"><?php echo $title  ?></h1>
+                    <p class="lead"><?php echo $author  ?></p>
                     <table class="table">
                         <tr>
                             <th>Jumlah Halaman</th>
-                            <td>400</td>
+                            <td><?php echo $jml_halaman  ?></td>
+                            
                         </tr>
                         <tr>
                             <th>Tanggal Terbit</th>
-                            <td>4 September 2022</td>
+                            <td><?php echo $tgl_terbit  ?></td>
                         </tr>
                         <tr>
                             <th>Kategori</th>
-                            <td>Novel</td>
+                            <td><?php echo $category  ?></td>
                         </tr>
                         <tr>
                             <th>ISBN</th>
-                            <td>978-602-03-1411-2</td>
+                            <td><?php echo $isbn  ?></td>
                         </tr>
                         <tr>
                             <th>Penerbit</th>
-                            <td>PENERBIT SABAK GRIP</td>
+                            <td><?php echo $penerbit  ?></td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <div class="row mt-4">
+            <div class="row mt-4 p-4 rounded"  style="background: rgba(0, 123, 255, 0.1)">
                 <div class="col">
                     <h2>Sinopsis</h2>
                     <p class="text-justify">
-                        Masih tentang kisah petualangan tiga remaja tangguh Raib, Seli, dan Ali. Namun kali ini ada tambahan tokoh yakni ILY dan tokoh lainnya. 
-                        Ily merupakan putra sulung dari Ilo, ily lulusan akademi klan bulan dengan postur tubuh gagah dan sangat disiplin. 
-                        Wajahnya amat tampan, dengan bola mata hitam. Ily murah senyum dan dalam senyumnya itu ada lesung pipi yang membuat ily terlihat manis. 
-                        Awalnya, kedatangan Av, miss selena, Raib, Seli, Ali, dan Ily hanya untuk mencari sekutu dalam menjaga perdamaian dunia antar klan serta menjaga agar si Tanpa Mahkota tetap di tempatnya, 
-                        yakni penjara bayangan di bawah bayangan. Namun, ketua konsil klan matahari, Fala-tara-tana IV justru memanfaatkan mereka untuk menambah kekuatan sang ketua. 
-                        Yakni dengan mengikutsertakan Raib, Seli, Ali, dan Ily dalam kompetisi mencari bunga matahari yang pertama mekar pada hari ke 10 sejak kompetisi itu di mulai. 
-                        Keluar dari portal, mereka langsung di sambut sorak sorai para penonton di tribun. Mereka datang percis saat pembukaan acara festival bunga matahari. 
-                        Raib, Seli, Ali, dan Ily mengikuti kompetisi dengan mengunggangi Harimau putih dari pegunungaan salju, Hadiah dari Mala tara tana II. 
-                        Di tengah lapangan istana ilios, saat petir menghantam api unggun, sembilan kontingen lain berderap meninggalkaan lapangan istana besama hewan yang di tungganginya menerobos gerbang-gerbang yang ada. 
-                        Raib dan rombongan menuju utara, mengikuti arahan Ily. Petualangan mereka di klan matahari di mulai. 
-                        Memasuki hutan lebat, singgah di ternak lebah milik hana, melintasi padang perdu berduri, memasuki hutan, melawan gorila, menghindari burung pemakan daging, 
-                        melintasi lereng pegunungan berkabut, menyebrangi danau, tiba di perkampungan danau teluk jauh, bertemu mela-tara-nata II. Melawan monster danau teluk jauh, lolos dari air bah yang tumpah, mendaki bukit, 
-                        melewati lautan jamur beracun, memasuki lorong tikus bawah tanah. Dan kembali ke peternakan lebah milik hana. Banyak rintangan yang mereka lewati, bertemu dengan hal-hal baru, 
-                        membantu kontingen lain, membantu orang yang bahkan mengusir mereka. Di akhir, mereka bertarung. Melawan ketua konsil yang hendak membuka portal penjara bayangan di bawah banyangan dan membebaskan Si Tanpa Mahkota. 
-                        Hana mengorbankan lebahnya dan Ily mengorbankan dirinya.
+                        <?php echo $review ?>
                     </p>
                 </div>
             </div>
@@ -68,11 +83,10 @@
             <h2>Ulasan</h2>
             <div class="review mb-3">
                 <div class="d-flex align-items-center">
-                    <img src="ariana.jpeg" alt="Foto Profil" class="mr-3 rounded-circle" style="width: 50px;">
                     <div class="ms-3">
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
                         <h3 class="h6 mb-0">Hana Shabrina</h3>
                         <p class="mb-0">Bukunya sangat bagus!</p>
-                        <div class="rating">⭐⭐⭐⭐⭐</div>
                     </div>
                 </div>
             </div>
@@ -103,10 +117,5 @@
             </form>
         </section>
     </main>
-    <br><br>
+<?php include('./footer.php') ?>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-eSNceF7lWcq5vR3BCSw0f0b0OV66KggFolrql7FsbXEgiJlJ3z8Ei1dFtyAg2dYR" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMzI5KvbSgRZDIOMCdgnD0P4dQD8H37ZpFk0qXl5NNTFwtG7pC8JwZUK1zX" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-DV2ahR4Hv1QF8e5TfIeB5rrStk3fP0T/RWtOBtDfZ51i4Hzv3nmEaqngM+4ZBUpm" crossorigin="anonymous"></script>
-</body>
-</html>

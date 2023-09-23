@@ -1,4 +1,7 @@
-<?php include('./header.php') ?>
+<?php 
+    include('./header.php');
+    require_once('./lib/db_login.php');
+?>
 <div class="card mt-5">
     <div class="card-header">Books Data</div>
     <div class="card-body">
@@ -13,8 +16,6 @@
                 <th>Action</th>
             </tr>
             <?php
-            require_once('./lib/db_login.php');
-
             $query = "SELECT * FROM books ORDER BY isbn";
             
             $result = $db->query($query);
@@ -27,7 +28,7 @@
             while ($row = $result->fetch_object()) {
                 echo '<tr>';
                 echo '<td>' . $row->isbn . '</td>';
-                echo '<td>' . $row->title . '</td>';
+                echo '<td><a href="detail.php?isbn='.$row->isbn.'">' . $row->title . '</a></td>';
                 echo '<td>' . $row->category . '</td>';
                 echo '<td>' . $row->author . '</td>';
                 echo '<td>$' . $row->price . '</td>';
