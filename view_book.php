@@ -2,6 +2,7 @@
     include('./header.php');
     require_once('./lib/db_login.php');
 ?>
+
 <div class="card mt-5">
     <ul class="nav">
         <li class="nav-item">
@@ -24,14 +25,14 @@
     <div class="card-body">
         <div class="d-flex align-items-center mb-3">
             <a href="add_book.php" class="btn btn-primary">+ Add Book Data</a>
-            <form action="" class="form-groupm mx-2">
-                <label for="">cari</label>
-                <input type="text" name="search" id="search" class="form-check">
+            <form action="" class="form-groupm mx-z" method="post">
+                <input type="text" name="search" id="search" class="form-check" autofocus placeholder="Masukkan keyword">
+                <select>
+                    <option value="none">--Select a Category--</option>
+                </select>
             </form>
         </div>
-        
-            
-        </form>
+        <div id="container">
         <table class="table table-striped">
             <tr>
                 <th>ISBN</th>
@@ -69,6 +70,9 @@
             $result->free();
             $db->close();
             ?>
+        </table>
+        </div>
     </div>
 </div>
+<script src="ajax.js"></script>
 <?php include('./footer.php') ?>
