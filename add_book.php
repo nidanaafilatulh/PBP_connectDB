@@ -40,8 +40,8 @@ if (isset($_POST["submit"])) {
     if ($price == '' || $price == 'none') {
         $error_price = "price is required";
         $valid = FALSE;
-    } elseif(!preg_match("/^[0-9][0-9]{0,10}$/", $price)) {
-        $error_price = "Price hanya dapat berisi angka";
+    } elseif (!preg_match("/^\d+(\.\d{1,2})?$/", $price)) {
+        $error_price = "Price hanya dapat berisi angka dan maksimal 2 digit di belakang koma";
         $valid = FALSE;
     }
 
@@ -79,9 +79,9 @@ if (isset($_POST["submit"])) {
                 <label for="category">Category:</label>
                 <select name="category" id="category" class="form-control" required>
                     <option value="none" <?php if (!isset($category)) echo 'selected' ?>>--Select a Category--</option>
-                    <option value="Airport West" <?php if (isset($category) && $category == "Airport West") echo 'selected' ?>>Airport West</option>
-                    <option value="Box Hill" <?php if (isset($category) && $category == "Box Hill") echo 'selected' ?>>Box Hill</option>
-                    <option value="Yarraville" <?php if (isset($category) && $category == "Yarraville") echo 'selected' ?>>Yarraville</option>
+                    <option value="Education" <?php if (isset($category) && $category == "Education") echo 'selected' ?>>Education</option>
+                    <option value="Motivation" <?php if (isset($category) && $category == "Motivation") echo 'selected' ?>>Motivation</option>
+                    <option value="Romance" <?php if (isset($category) && $category == "Romance") echo 'selected' ?>>Romance</option>
                 </select>
                 <div class="text-danger"><?php if (isset($error_category)) echo $error_category ?></div>
             </div>
