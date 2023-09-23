@@ -137,7 +137,7 @@
                         <option value='5'>⭐⭐⭐⭐⭐</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" name="submit" value="submit">tambahkan Ulasan</button>
+                <button type="submit" class="btn btn-primary mb-3" name="submit" value="submit">tambahkan Ulasan</button>
             </form>
         </section>
     </main>

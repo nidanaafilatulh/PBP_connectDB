@@ -8,16 +8,19 @@
             <a class="nav-link active" href="view_book.php">Data</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="order.php">Order</a>
+            <a class="nav-link" href="kategori.php">Kategori</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="kategori.php">Kategori</a>
+            <a class="nav-link" href="catalog.php">Katalog</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="show_cart.php">Keranjang</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="statistik.php">Statistik</a>
         </li>
     </ul>
-    <div class="card-header">Data Categories</div>
+    <div class="card-header">Data Kategories</div>
     <div class="card-body">
         <table class="table table-bordered">
             <tr>
@@ -62,6 +65,7 @@
         </table>
         <br />
         <?php
+        echo 'Total Groups = ' . $resultData->num_rows-1;
         ?>
     </div>
 </div>
