@@ -24,7 +24,7 @@ keyword.addEventListener('keyup', function(){
         }
     }
     // execute ajax
-    xhr.open('GET', 'view_book.php?keyword=' + keyword.value,true);
+    xhr.open('GET', 'book.php?keyword=' + keyword.value,true);
     xhr.send();
 })
 
