@@ -4,8 +4,17 @@
 ?>
 <div class="card mt-5">
     <div class="card-header">Books Data</div>
-    <div class="card-body">
-        <a href="add_book.php" class="btn btn-primary mb-4">+ Add Book Data</a>
+    <div class="card-body">'
+        <div class="d-flex align-items-center mb-3">
+            <a href="add_book.php" class="btn btn-primary">+ Add Book Data</a>
+            <form action="" class="form-groupm mx-2">
+                <label for="">cari</label>
+                <input type="text" name="search" id="search" class="form-check">
+            </form>
+        </div>
+        
+            
+        </form>
         <table class="table table-striped">
             <tr>
                 <th>ISBN</th>
