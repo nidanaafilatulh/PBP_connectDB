@@ -31,10 +31,7 @@
 
 <body>
     <main class="container mt-5 w-75" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) . '?isbn=' . $isbn ?>">
-        <div class="container d-flex align-items-center align-center">
-            <a href="view_book.php" class="btn btn-primary">Kembali</a>
-            <p class="">Detail Buku </p>
-        </div>
+        <a href="view_book.php" class="btn btn-secondary mb-3">Kembali</a>
         
         <section class="book-details">
             <div class="row ">

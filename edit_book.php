@@ -2,11 +2,6 @@
 
 include('./header.php');    
 
-session_start();
-if(!isset($_SESSION['username'])){
-    header('Location: login.php');
-}
-
 // TODO 1: Lakukan koneksi dengan database
 require_once('./lib/db_login.php');
 
