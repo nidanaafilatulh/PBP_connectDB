@@ -1,5 +1,5 @@
 <?php 
-    require_once "koneksi.php";
+    require_once "db_login.php";
     $id = $_GET['id'];
     $query = mysqli_query($koneksi, "SELECT * FROM buku WHERE id='$id'");
     $data = mysqli_fetch_array($query);
