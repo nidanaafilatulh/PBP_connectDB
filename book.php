@@ -1,22 +1,10 @@
 <?php 
-    include('./header.php');
     require_once('./lib/db_login.php');
+    $keyword = $_GET["keyword"];
+    $query = "SELECT * FROM books WHERE title LIKE '%$keyword%' OR author LIKE '%$keyword%' OR isbn LIKE '%$keyword%'";
+    $result = $db->query($query);
 ?>
-
-<div class="card mt-5">
-    <div class="card-header">Books Data</div>
-    <div class="card-body">'
-        <div class="d-flex align-items-center mb-3">
-            <a href="add_book.php" class="btn btn-primary">+ Add Book Data</a>
-            <form action="" class="form-groupm mx-z" method="post">
-                <input type="text" name="search" id="search" class="form-check" autofocus placeholder="Masukkan keyword">
-                <select>
-                    <option value="none">--Select a Category--</option>
-                </select>
-            </form>
-        </div>
-        <div id="container">
-        <table class="table table-striped">
+<table class="table table-striped">
             <tr>
                 <th>ISBN</th>
                 <th>Title</th>
@@ -26,13 +14,6 @@
                 <th>Action</th>
             </tr>
             <?php
-            $query = "SELECT * FROM books ORDER BY isbn";
-            
-            $result = $db->query($query);
-            if (!$result) {
-                die("Could not query the database: <br />" . $db->error . "<br>Query: " . $query);
-            }
-
             // Fetch and display the results
             $i = 1;
             while ($row = $result->fetch_object()) {
@@ -53,9 +34,4 @@
             $result->free();
             $db->close();
             ?>
-        </table>
-        </div>
-    </div>
-</div>
-<script src="ajax.js"></script>
-<?php include('./footer.php') ?>
+</table>
