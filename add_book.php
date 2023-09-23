@@ -48,7 +48,6 @@ if (isset($_POST["submit"])) {
     if($valid) {
         $query = "INSERT into books (isbn, title, category, author, price) VALUES ('".$isbn."', '".$title."', '".$category."', '".$author."', '".$price."');";
         $result = $db->query($query);
-        echo $query;
         if(!$result) {
             die("Could not query the database: <br />".$db->error);
         } else {
