@@ -4,6 +4,20 @@
 ?>
 
 <div class="card mt-5">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="view_book.php">Data</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="order.php">Order</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="kategori.php">Kategori</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="statistik.php">Statistik</a>
+        </li>
+    </ul>
     <div class="card-header">Books Data</div>
     <div class="card-body">'
         <div class="d-flex align-items-center mb-3">
@@ -42,7 +56,7 @@
                 echo '<td>' . $row->category . '</td>';
                 echo '<td>' . $row->author . '</td>';
                 echo '<td>$' . $row->price . '</td>';
-                echo '<td><a class="btn btn-warning btn-sm" href="edit_book.php?isbn='.$row->isbn.'">Edit</a> '.' <a class="btn btn-danger btn-sm" href="delete_book.php?isbn='.$row->isbn.'">Delete</a></td>';
+                echo '<td><a class="btn btn-warning btn-sm m-1" href="edit_book.php?isbn='.$row->isbn.'">Edit</a> '.' <a class="btn btn-danger btn-sm" href="delete_book.php?isbn='.$row->isbn.'">Delete</a></td>';
                 echo '</tr>';
                 $i++;
             }
