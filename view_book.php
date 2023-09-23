@@ -74,5 +74,5 @@
         </div>
     </div>
 </div>
-<script src="ajax.js"></script>
+<script src="js/ajax.js"></script>
 <?php include('./footer.php') ?>
