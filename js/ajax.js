@@ -42,16 +42,3 @@ document.getElementById('categoryFilter').addEventListener('change', function() 
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send('category=' + selectedCategory); // Mengirim kategori yang dipilih ke PHP
 });
-
-function search_book() {
-	let search = document.getElementById('search').value;
-	let inner = 'result';
-	let url = 'detail.php?search=' + search;
-	CallAjax(url, inner);
-}
-
-function detail_book(isbn) {
-	let inner = 'result';
-	let url = 'get_detail_book.php?isbn=' + isbn;
-	CallAjax(url, inner);
-}

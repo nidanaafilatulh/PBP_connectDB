@@ -92,7 +92,7 @@
             </form>
         </div>
         <div id="container">
-        <table class="table table-striped">
+        <table class="table table-striped" id="filteredResultsContainer"> 
             <tr>
                 <th>ISBN</th>
                 <th>Title</th>
@@ -132,6 +132,38 @@
         </div>
     </div>
 </div>
+<script>
+    // Dapatkan elemen select dan tambahkan event listener
+    const categoryFilter = document.getElementById('categoryFilter');
+    categoryFilter.addEventListener('change', function () {
+        // Dapatkan nilai kategori yang dipilih
+        const selectedCategory = categoryFilter.value;
+
+        // Dapatkan elemen tabel yang akan diperbarui
+        const tableBody = document.querySelector('.table tbody');
+
+        // Temukan semua baris dalam tabel
+        const rows = tableBody.querySelectorAll('tr');
+
+        // Loop melalui setiap baris
+        rows.forEach(function (row) {
+            // Dapatkan kolom kategori dalam setiap baris
+            const categoryColumn = row.querySelector('td:nth-child(3)');
+
+            // Dapatkan nilai kategori dalam kolom kategori
+            const rowCategory = categoryColumn.textContent.trim();
+
+            // Periksa apakah nilai kategori dalam baris cocok dengan kategori yang dipilih
+            if (selectedCategory === '' || rowCategory === selectedCategory) {
+                // Tampilkan baris jika cocok atau tidak ada kategori yang dipilih
+                row.style.display = 'table-row';
+            } else {
+                // Sembunyikan baris jika tidak cocok dengan kategori yang dipilih
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="ajax.js"></script>

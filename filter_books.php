@@ -15,7 +15,7 @@ if (!empty($searchKeyword)) {
 }
 
 if (!empty($category)) {
-    $query .= " AND 'name' = '$category'";
+    $query .= " AND c.name = '$category'";
     echo $query;
 }
 
