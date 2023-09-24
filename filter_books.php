@@ -8,14 +8,15 @@ $minPrice = $db->real_escape_string($_POST['minprice']);
 $maxPrice = $db->real_escape_string($_POST['maxprice']);
 
 // Build SQL query based on form inputs
-$query = "SELECT * FROM books WHERE 1=1";
+$query = "SELECT * FROM books b LEFT JOIN categories c ON b.categoryid = c.categoryid WHERE 1=1";
 
 if (!empty($searchKeyword)) {
     $query .= " AND (title LIKE '%$searchKeyword%' OR author LIKE '%$searchKeyword%' OR isbn LIKE '%$searchKeyword%')";
 }
 
 if (!empty($category)) {
-    $query .= " AND category = '$category'";
+    $query .= " AND 'name' = '$category'";
+    echo $query;
 }
 
 if (!empty($minPrice)) {
@@ -33,6 +34,7 @@ $result = $db->query($query);
 if (!$result) {
     die("Could not query the database: <br />" . $db->error . "<br>Query: " . $query);
 }
+
 ?>
 
 <table class="table table-striped">
@@ -51,7 +53,7 @@ if (!$result) {
                 echo '<tr>';
                 echo '<td>' . $row->isbn . '</td>';
                 echo '<td><a href="detail.php?isbn='.$row->isbn.'">' . $row->title . '</a></td>';
-                echo '<td>' . $row->category . '</td>';
+                echo '<td>' . $row->name . '</td>';
                 echo '<td>' . $row->author . '</td>';
                 echo '<td>$' . $row->price . '</td>';
                 echo '<td><a class="btn btn-warning btn-sm" href="edit_book.php?isbn='.$row->isbn.'">Edit</a> '.' <a class="btn btn-danger btn-sm" href="delete_book.php?isbn='.$row->isbn.'">Delete</a></td>';

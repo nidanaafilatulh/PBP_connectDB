@@ -59,9 +59,10 @@
                 <input type="text" name="search" id="search" class="form-check" autofocus placeholder="Masukkan keyword"><br>
                 <select id="categoryFilter" name="category">
                     <option value="">--Select a Category--</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Motivation">Motivation</option>
                     <option value="Education">Education</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Motivation">Motivation</option>
+                    <option value="Romance">Romance</option>
                 </select>
                 <input
                     type="number"
@@ -133,7 +134,7 @@
 </div>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-<!-- <script src="ajax.js"></script> -->
+<script src="ajax.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="script.js"></script>
 <?php include('./footer.php') ?>

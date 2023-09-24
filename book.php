@@ -2,7 +2,7 @@
     require_once('./lib/db_login.php');
     $keyword = $_GET["keyword"];
     // $category = $_POST["categoryFilter"];
-    $query = "SELECT * FROM books WHERE title LIKE '%$keyword%' OR author LIKE '%$keyword%' OR isbn LIKE '%$keyword%'";
+    $query = "SELECT * FROM books b LEFT JOIN categories c ON b.categoryid = c.categoryid WHERE title LIKE '%$keyword%' OR author LIKE '%$keyword%' OR isbn LIKE '%$keyword%'";
     // if (!empty($category)) {
     //     $query .= " AND category = '$category'";
     // } 
