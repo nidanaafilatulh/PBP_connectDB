@@ -3,18 +3,21 @@
     require_once('./lib/db_login.php');
 ?>
 <div class="card mt-5">
-    <ul class="nav">
+    <ul class="nav nav-pills">
         <li class="nav-item">
-            <a class="nav-link active" href="view_book.php">Data</a>
+            <a class="nav-link" href="view_book.php">Data</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="kategori.php">Kategori</a>
+            <a class="nav-link active" href="kategori.php">Kategori</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="catalog.php">Katalog</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="show_cart.php">Keranjang</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="order.php">Order</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="statistik.php">Statistik</a>
@@ -31,7 +34,7 @@
                 <th>Price</th>
             </tr>
             <?php
-            $countQuery = "SELECT category, COUNT(*) AS count FROM books GROUP BY category ORDER BY category";
+            $countQuery = "SELECT c.name AS category, COUNT(*) AS count FROM books b LEFT JOIN categories c ON b.categoryid = c.categoryid GROUP BY c.name ORDER BY c.name";
             $resultCount = $db->query($countQuery);
             if (!$resultCount) {
                 die("Could not query the database: <br />" . $db->error . "<br>Query: " . $countQuery);
@@ -41,7 +44,7 @@
                 $category = $rowCategory['category'];
                 $count = $rowCategory['count'];
 
-                $dataQuery = "SELECT isbn, title, author, price FROM books WHERE category = '$category'";
+                $dataQuery = "SELECT b.isbn, b.title, b.author, b.price FROM books b LEFT JOIN categories c ON b.categoryid = c.categoryid WHERE c.name = '$category'";
                 $resultData = $db->query($dataQuery);
 
                 if (!$resultData) {
@@ -59,13 +62,12 @@
                     echo '</tr>';
                 }
             }
-
-            $resultCount->free();
             ?>
         </table>
         <br />
         <?php
-        echo 'Total Groups = ' . $resultData->num_rows-1;
+        echo 'Total Groups = ' . $resultCount->num_rows;
+        $resultCount->free();
         ?>
     </div>
 </div>

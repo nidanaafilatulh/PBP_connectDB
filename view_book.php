@@ -4,7 +4,7 @@
 ?>
 
 <div class="card mt-5">
-    <ul class="nav">
+    <ul class="nav nav-pills">    
         <li class="nav-item">
             <a class="nav-link active" href="view_book.php">Data</a>
         </li>
@@ -16,6 +16,9 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="show_cart.php">Keranjang</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="order.php">Order</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="statistik.php">Statistik</a>
@@ -98,7 +101,7 @@
                 <th>Action</th>
             </tr>
             <?php
-            $query = "SELECT * FROM books ORDER BY isbn";
+            $query = "SELECT * FROM categories c LEFT JOIN books b ON c.categoryid = b.categoryid ORDER BY b.isbn";
             
             $result = $db->query($query);
             if (!$result) {
@@ -110,7 +113,7 @@
                 echo '<tr>';
                 echo '<td>' . $row->isbn . '</td>';
                 echo '<td><a href="detail.php?isbn='.$row->isbn.'">' . $row->title . '</a></td>';
-                echo '<td>' . $row->category . '</td>';
+                echo '<td>' . $row->name . '</td>';
                 echo '<td>' . $row->author . '</td>';
                 echo '<td>$' . $row->price . '</td>';
                 echo '<td><a class="btn btn-warning btn-sm m-1" href="edit_book.php?isbn='.$row->isbn.'">Edit</a> '.' <a class="btn btn-danger btn-sm" href="delete_book.php?isbn='.$row->isbn.'">Delete</a></td>';

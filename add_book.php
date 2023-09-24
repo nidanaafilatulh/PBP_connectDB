@@ -46,7 +46,8 @@ if (isset($_POST["submit"])) {
     }
 
     if($valid) {
-        $query = "INSERT into books (isbn, title, category, author, price) VALUES ('".$isbn."', '".$title."', '".$category."', '".$author."', '".$price."');";
+        $query = "INSERT INTO books (isbn, title, author, price, categoryid) VALUES ('$isbn', '$title', '$author', '$price', (SELECT categoryid FROM categories WHERE name = '$category'))";
+
         $result = $db->query($query);
         if(!$result) {
             die("Could not query the database: <br />".$db->error);
@@ -79,6 +80,7 @@ if (isset($_POST["submit"])) {
                 <select name="category" id="category" class="form-control" required>
                     <option value="none" <?php if (!isset($category)) echo 'selected' ?>>--Select a Category--</option>
                     <option value="Education" <?php if (isset($category) && $category == "Education") echo 'selected' ?>>Education</option>
+                    <option value="Fiction" <?php if (isset($category) && $category == "Fiction") echo 'selected' ?>>Fiction</option>
                     <option value="Motivation" <?php if (isset($category) && $category == "Motivation") echo 'selected' ?>>Motivation</option>
                     <option value="Romance" <?php if (isset($category) && $category == "Romance") echo 'selected' ?>>Romance</option>
                 </select>

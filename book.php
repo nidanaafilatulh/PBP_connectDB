@@ -25,7 +25,7 @@
                 echo '<tr>';
                 echo '<td>' . $row->isbn . '</td>';
                 echo '<td><a href="detail.php?isbn='.$row->isbn.'">' . $row->title . '</a></td>';
-                echo '<td>' . $row->category . '</td>';
+                echo '<td>' . $row->name . '</td>';
                 echo '<td>' . $row->author . '</td>';
                 echo '<td>$' . $row->price . '</td>';
                 echo '<td><a class="btn btn-warning btn-sm" href="edit_book.php?isbn='.$row->isbn.'">Edit</a> '.' <a class="btn btn-danger btn-sm" href="delete_book.php?isbn='.$row->isbn.'">Delete</a></td>';
