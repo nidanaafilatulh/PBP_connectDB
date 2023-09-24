@@ -1,13 +1,11 @@
 <?php
 require_once('./lib/db_login.php');
 
-// Get form inputs
 $searchKeyword = $db->real_escape_string($_POST['search']);
 $category = $db->real_escape_string($_POST['category']);
 $minPrice = $db->real_escape_string($_POST['minprice']);
 $maxPrice = $db->real_escape_string($_POST['maxprice']);
 
-// Build SQL query based on form inputs
 $query = "SELECT * FROM books b LEFT JOIN categories c ON b.categoryid = c.categoryid WHERE 1=1";
 
 if (!empty($searchKeyword)) {
@@ -16,7 +14,6 @@ if (!empty($searchKeyword)) {
 
 if (!empty($category)) {
     $query .= " AND c.name = '$category'";
-    echo $query;
 }
 
 if (!empty($minPrice)) {
@@ -29,12 +26,10 @@ if (!empty($maxPrice)) {
 
 $query .= " ORDER BY isbn";
 
-// Execute the query and return the filtered results as HTML
 $result = $db->query($query);
 if (!$result) {
     die("Could not query the database: <br />" . $db->error . "<br>Query: " . $query);
 }
-
 ?>
 
 <table class="table table-striped">

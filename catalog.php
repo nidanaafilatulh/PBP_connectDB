@@ -31,7 +31,6 @@
                 <th>Action</th>
             </tr>
             <?php
-            // Include our login information
             require_once('./lib/db_login.php');
 
             // TODO 1: Tuliskan dan eksekusi query

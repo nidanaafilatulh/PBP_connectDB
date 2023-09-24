@@ -80,7 +80,6 @@
                     echo "<td>$" . $row['amount'] . "</td>";
                     echo "</tr>";
                 }
-
                 // Tutup koneksi database jika sudah tidak digunakan.
                 $db->close();
                 ?>

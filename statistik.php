@@ -34,7 +34,6 @@
             die('Could not query the database: <br/>' . $db->error . '<br>Query:' . $query);
         }
 
-        //array untuk data grafik
         $data = array();
         while ($row = $result->fetch_assoc()) {
             $data[] = array(
@@ -63,7 +62,6 @@
             );
         }
 
-        //konversi agar bisa digunakan di JS
         $json_data = json_encode($data);
 
         ?>
