@@ -38,7 +38,7 @@ document.getElementById('categoryFilter').addEventListener('change', function() 
         }
     };
     // Membuka dan mengirim permintaan AJAX dengan metode POST
-    xhr.open('POST', 'book1.php', true);
+    xhr.open('POST', 'book.php', true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send('category=' + selectedCategory); // Mengirim kategori yang dipilih ke PHP
 });
