@@ -28,7 +28,7 @@ if ($id != '') {
             <a class="nav-link active" href="view_book.php">Data</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="kategori.php">Kategori</a>
+            <a class="nav-link" href="kategori.php">Kategoi</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="catalog.php">Katalog</a>
