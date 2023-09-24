@@ -9,7 +9,7 @@ $isbn = $_GET['isbn'];
 
 // Memeriksa apakah user belum menekan tombol submit
 if (!isset($_POST["submit"]))  {
-  $query = "SELECT * FROM books WHERE isbn='$isbn'";
+  $query = "SELECT * FROM categories c LEFT JOIN books b ON c.categoryid = b.categoryid WHERE b.isbn='$isbn'";
     $result = $db->query($query);
     if(!$result) {
         die("Could not query the database: <br />".$db->error);
@@ -17,7 +17,7 @@ if (!isset($_POST["submit"]))  {
         while($row = $result->fetch_object()){
             $isbn = $row->isbn;
             $title = $row->title;
-            $category = $row->category;
+            $category = $row->name;
             $author = $row->author;
             $price = $row->price;
         }

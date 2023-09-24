@@ -4,7 +4,8 @@
 
     $isbn = $_GET['isbn'];
 
-    $query = "SELECT books.isbn, books.title, books.author, books.category, books.price, book_reviews.review, books.jml_halaman, books.tgl_terbit, books.penerbit, books.img_url, reviews.name, reviews.desc, reviews.rating FROM books LEFT JOIN book_reviews ON books.isbn = book_reviews.isbn LEFT JOIN reviews ON books.isbn = reviews.isbn WHERE books.isbn='$isbn'";
+    $query = "SELECT books.isbn, books.title, books.author, books.price, book_reviews.review, books.jml_halaman, books.tgl_terbit, books.penerbit, books.img_url, reviews.name, reviews.desc, reviews.rating, categories.name FROM books LEFT JOIN book_reviews ON books.isbn = book_reviews.isbn LEFT JOIN reviews ON books.isbn = reviews.isbn LEFT JOIN categories ON categories.categoryid = books.categoryid  WHERE books.isbn='$isbn'";
+
     $result = $db->query($query);
     if(!$result) {
         die("Could not query the database: <br />".$db->error);
@@ -12,7 +13,7 @@
         while($row = $result->fetch_object()){
             $isbn = $row->isbn;
             $title = $row->title;
-            $category = $row->category;
+            $category = $row->name;
             $author = $row->author;
             $price = $row->price;
             $review = $row->review;

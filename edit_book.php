@@ -11,7 +11,7 @@ $isbn = $_GET['isbn'];
 // Memeriksa apakah user belum menekan tombol submit
 if (!isset($_POST["submit"])) {
     // TODO 3: Tulislah dan eksekusi query untuk mengambil informasi customer berdasarkan id
-    $query = "SELECT * FROM books WHERE isbn='$isbn'";
+    $query = "SELECT * FROM categories c LEFT JOIN books b ON c.categoryid = b.categoryid WHERE b.isbn='$isbn'";
     $result = $db->query($query);
     if(!$result) {
         die("Could not query the database: <br />".$db->error);
@@ -19,7 +19,8 @@ if (!isset($_POST["submit"])) {
         while($row = $result->fetch_object()){
             $isbn = $row->isbn;
             $title = $row->title;
-            $category = $row->category;
+            $categoryid = $row->categoryid;
+            $category = $row->name;
             $author = $row->author;
             $price = $row->price;
         }
@@ -29,7 +30,7 @@ if (!isset($_POST["submit"])) {
 } else {
     $valid = TRUE;
 
-    $isbn = test_input($_POST['isbn']);
+    $isbn = test_input($_GET['isbn']);
     if($isbn == '') {
         $error_isbn = "ISBN harus diisi";
         $valid = FALSE;
@@ -46,10 +47,20 @@ if (!isset($_POST["submit"])) {
     }
 
     // Validasi terhadap field city
-    $category = $_POST['category'];
-    if ($category == '' || $category == 'none') {
+    $category_name = $_POST['category'];
+    if ($category_name == '' || $category_name == 'none') {
         $error_category = "Category is required";
         $valid = FALSE;
+    } else {
+        // Temukan categoryid berdasarkan nama kategori yang diinput
+        $category_query = "SELECT categoryid FROM categories WHERE name='$category_name'";
+        $category_result = $db->query($category_query);
+        if (!$category_result) {
+            die("Could not query the database: <br />" . $db->error);
+        } else {
+            $category_row = $category_result->fetch_object();
+            $categoryid = $category_row->categoryid;
+        }
     }
 
     $author = $_POST['author'];
@@ -70,7 +81,7 @@ if (!isset($_POST["submit"])) {
     // Update data into database
     if ($valid) {
         // TODO 4: Jika valid, update data pada database dengan mengeksekusi query yang sesuai
-        $query = "UPDATE books SET isbn='".$isbn."', title='".$title."', category='".$category."', author='".$author."', price='".$price."' WHERE isbn='$isbn'";
+        $query = "UPDATE books SET title='".$title."', categoryid='".$categoryid."', author='".$author."', price='".$price."' WHERE isbn='$isbn'";
         $result = $db->query($query);
         $echo = $query;
         if(!$result) {
@@ -90,7 +101,7 @@ if (!isset($_POST["submit"])) {
     <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) . '?isbn=' . $isbn ?>" method="POST" autocomplete="on">
             <div class="form-group">
                 <label for="isbn">ISBN:</label>
-                <input type="text" class="form-control" id="isbn" name="isbn" value="<?= $isbn; ?>">
+                <input type="text" class="form-control" id="isbn" name="isbn" value="<?= $isbn; ?>" disabled>
                 <div class="text-danger"><?php if (isset($error_isbn)) echo $error_isbn ?></div>
             </div>
             <div class="form-group">
@@ -103,6 +114,7 @@ if (!isset($_POST["submit"])) {
                 <select name="category" id="category" class="form-control" required>
                     <option value="none" <?php if (!isset($category)) echo 'selected' ?>>--Select a Category--</option>
                     <option value="Education" <?php if (isset($category) && $category == "Education") echo 'selected' ?>>Education</option>
+                    <option value="Fiction" <?php if (isset($category) && $category == "Fiction") echo 'selected' ?>>Fiction</option>
                     <option value="Motivation" <?php if (isset($category) && $category == "Motivation") echo 'selected' ?>>Motivation</option>
                     <option value="Romance" <?php if (isset($category) && $category == "Romance") echo 'selected' ?>>Romance</option>
                 </select>
@@ -111,12 +123,12 @@ if (!isset($_POST["submit"])) {
             <div class="form-group">
                 <label for="author">Author:</label>
                 <input type="text" class="form-control" id="author" name="author" value="<?= $author; ?>">
-                <div class="text-dannger"><?php if (isset($error_author)) echo $error_author ?></div>
+                <div class="text-danger"><?php if (isset($error_author)) echo $error_author ?></div>
             </div>
             <div class="form-group">
                 <label for="price">Price:</label>
                 <input type="text" class="form-control" id="price" name="price" value="<?= $price; ?>">
-                <div class="text-dannger"><?php if (isset($error_price)) echo $error_price ?></div>
+                <div class="text-danger"><?php if (isset($error_price)) echo $error_price ?></div>
             </div>
             <br>
             <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>

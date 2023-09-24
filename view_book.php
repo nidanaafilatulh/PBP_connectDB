@@ -43,7 +43,7 @@
                 <th>Action</th>
             </tr>
             <?php
-            $query = "SELECT * FROM books ORDER BY isbn";
+            $query = "SELECT * FROM categories c LEFT JOIN books b ON c.categoryid = b.categoryid ORDER BY b.isbn";
             
             $result = $db->query($query);
             if (!$result) {
@@ -56,7 +56,7 @@
                 echo '<tr>';
                 echo '<td>' . $row->isbn . '</td>';
                 echo '<td><a href="detail.php?isbn='.$row->isbn.'">' . $row->title . '</a></td>';
-                echo '<td>' . $row->category . '</td>';
+                echo '<td>' . $row->name . '</td>';
                 echo '<td>' . $row->author . '</td>';
                 echo '<td>$' . $row->price . '</td>';
                 echo '<td><a class="btn btn-warning btn-sm m-1" href="edit_book.php?isbn='.$row->isbn.'">Edit</a> '.' <a class="btn btn-danger btn-sm" href="delete_book.php?isbn='.$row->isbn.'">Delete</a></td>';
