@@ -1,14 +1,10 @@
 <?php 
     require_once('./lib/db_login.php');
-    $keyword = $_GET["keyword"];
-    // $category = $_POST["categoryFilter"];
-    $query = "SELECT * FROM books WHERE title LIKE '%$keyword%' OR author LIKE '%$keyword%' OR isbn LIKE '%$keyword%'";
-    // if (!empty($category)) {
-    //     $query .= " AND category = '$category'";
-    // } 
-    // $query .= " ORDER BY isbn";
-    $result = $db->query($query);
+    $category = $_POST['category'];
+    $query1 = "SELECT * FROM books WHERE category LIKE '%$category%' ORDER BY isbn";
+    $result1 = $db->query($query1);
 ?>
+
 <table class="table table-striped">
             <tr>
                 <th>ISBN</th>
@@ -21,7 +17,7 @@
             <?php
             // Fetch and display the results
             $i = 1;
-            while ($row = $result->fetch_object()) {
+            while ($row = $result1->fetch_object()) {
                 echo '<tr>';
                 echo '<td>' . $row->isbn . '</td>';
                 echo '<td><a href="detail.php?isbn='.$row->isbn.'">' . $row->title . '</a></td>';
@@ -34,10 +30,9 @@
             }
             echo '</table>';
             echo '<br />';
-            echo 'Total Rows = ' . $result->num_rows;
+            echo 'Total Rows = ' . $result1->num_rows;
 
-            $result->free();
+            $result1->free();
             $db->close();
             ?>
-</table> 
-
+</table>

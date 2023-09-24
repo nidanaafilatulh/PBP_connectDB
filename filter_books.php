@@ -1,14 +1,40 @@
-<?php 
-    require_once('./lib/db_login.php');
-    $keyword = $_GET["keyword"];
-    // $category = $_POST["categoryFilter"];
-    $query = "SELECT * FROM books WHERE title LIKE '%$keyword%' OR author LIKE '%$keyword%' OR isbn LIKE '%$keyword%'";
-    // if (!empty($category)) {
-    //     $query .= " AND category = '$category'";
-    // } 
-    // $query .= " ORDER BY isbn";
-    $result = $db->query($query);
+<?php
+require_once('./lib/db_login.php');
+
+// Get form inputs
+$searchKeyword = $db->real_escape_string($_POST['search']);
+$category = $db->real_escape_string($_POST['category']);
+$minPrice = $db->real_escape_string($_POST['minprice']);
+$maxPrice = $db->real_escape_string($_POST['maxprice']);
+
+// Build SQL query based on form inputs
+$query = "SELECT * FROM books WHERE 1=1";
+
+if (!empty($searchKeyword)) {
+    $query .= " AND (title LIKE '%$searchKeyword%' OR author LIKE '%$searchKeyword%' OR isbn LIKE '%$searchKeyword%')";
+}
+
+if (!empty($category)) {
+    $query .= " AND category = '$category'";
+}
+
+if (!empty($minPrice)) {
+    $query .= " AND price >= $minPrice";
+}
+
+if (!empty($maxPrice)) {
+    $query .= " AND price <= $maxPrice";
+}
+
+$query .= " ORDER BY isbn";
+
+// Execute the query and return the filtered results as HTML
+$result = $db->query($query);
+if (!$result) {
+    die("Could not query the database: <br />" . $db->error . "<br>Query: " . $query);
+}
 ?>
+
 <table class="table table-striped">
             <tr>
                 <th>ISBN</th>
@@ -40,4 +66,3 @@
             $db->close();
             ?>
 </table> 
-
