@@ -79,9 +79,9 @@ if (isset($_POST['submit'])) {
 
 <br>
 <div class="card mt-4">
-<ul class="nav">
+<ul class="nav nav-pills">
         <li class="nav-item">
-            <a class="nav-link active" href="view_book.php">Data</a>
+            <a class="nav-link" href="view_book.php">Data</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="kategori.php">Kategori</a>
@@ -90,7 +90,7 @@ if (isset($_POST['submit'])) {
             <a class="nav-link" href="catalog.php">Katalog</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="show_cart.php">Keranjang</a>
+            <a class="nav-link active" href="show_cart.php">Keranjang</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="order.php">Order</a>

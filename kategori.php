@@ -3,12 +3,12 @@
     require_once('./lib/db_login.php');
 ?>
 <div class="card mt-5">
-    <ul class="nav">
+    <ul class="nav nav-pills">
         <li class="nav-item">
-            <a class="nav-link active" href="view_book.php">Data</a>
+            <a class="nav-link" href="view_book.php">Data</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="kategori.php">Kategori</a>
+            <a class="nav-link active" href="kategori.php">Kategori</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="catalog.php">Katalog</a>
@@ -25,7 +25,7 @@
     </ul>
     <div class="card-header">Data Kategories</div>
     <div class="card-body">
-        <table class="table table-striped table-bordered">
+        <table class="table table-bordered">
             <tr>
                 <th>Category</th>
                 <th>ISBN</th>

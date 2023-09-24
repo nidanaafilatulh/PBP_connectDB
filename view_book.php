@@ -4,7 +4,7 @@
 ?>
 
 <div class="card mt-5">
-    <ul class="nav">    
+    <ul class="nav nav-pills">    
         <li class="nav-item">
             <a class="nav-link active" href="view_book.php">Data</a>
         </li>
