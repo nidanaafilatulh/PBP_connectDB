@@ -9,7 +9,7 @@ $isbn = $_GET['isbn'];
 
 // Memeriksa apakah user belum menekan tombol submit
 if (!isset($_POST["submit"]))  {
-  $query = "SELECT * FROM books WHERE isbn='$isbn'";
+  $query = "SELECT * FROM categories c LEFT JOIN books b ON c.categoryid = b.categoryid WHERE b.isbn='$isbn'";
     $result = $db->query($query);
     if(!$result) {
         die("Could not query the database: <br />".$db->error);
@@ -17,7 +17,7 @@ if (!isset($_POST["submit"]))  {
         while($row = $result->fetch_object()){
             $isbn = $row->isbn;
             $title = $row->title;
-            $category = $row->category;
+            $category = $row->name;
             $author = $row->author;
             $price = $row->price;
         }
@@ -37,7 +37,8 @@ if (!isset($_POST["submit"]))  {
 <?php include('./header.php') ?>
 <br>
 <div class="card mt-4">
-    <div class="card-header">Delete Book Data</div>
+    <div class="card-header text-danger">Apakah anda yakin ingin Menghapus data ini?</div>
+        
     <div class="card-body">
         <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) . '?isbn=' . $isbn ?>" method="POST" autocomplete="on">
             <div class="form-group">

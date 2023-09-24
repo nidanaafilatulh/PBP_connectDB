@@ -1,9 +1,37 @@
-<?php 
-    require_once('./lib/db_login.php');
-    $keyword = $_GET["keyword"];
-    $query = "SELECT * FROM books b LEFT JOIN categories c ON b.categoryid = c.categoryid WHERE title LIKE '%$keyword%' OR author LIKE '%$keyword%' OR isbn LIKE '%$keyword%'";
-    $result = $db->query($query);
+<?php
+require_once('./lib/db_login.php');
+
+$searchKeyword = $db->real_escape_string($_POST['search']);
+$category = $db->real_escape_string($_POST['category']);
+$minPrice = $db->real_escape_string($_POST['minprice']);
+$maxPrice = $db->real_escape_string($_POST['maxprice']);
+
+$query = "SELECT * FROM books b LEFT JOIN categories c ON b.categoryid = c.categoryid WHERE 1=1";
+
+if (!empty($searchKeyword)) {
+    $query .= " AND (title LIKE '%$searchKeyword%' OR author LIKE '%$searchKeyword%' OR isbn LIKE '%$searchKeyword%')";
+}
+
+if (!empty($category)) {
+    $query .= " AND c.name = '$category'";
+}
+
+if (!empty($minPrice)) {
+    $query .= " AND price >= $minPrice";
+}
+
+if (!empty($maxPrice)) {
+    $query .= " AND price <= $maxPrice";
+}
+
+$query .= " ORDER BY isbn";
+
+$result = $db->query($query);
+if (!$result) {
+    die("Could not query the database: <br />" . $db->error . "<br>Query: " . $query);
+}
 ?>
+
 <table class="table table-striped">
             <tr>
                 <th>ISBN</th>
@@ -35,4 +63,3 @@
             $db->close();
             ?>
 </table> 
-

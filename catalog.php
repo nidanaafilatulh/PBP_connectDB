@@ -1,17 +1,20 @@
 <?php include('./header.php') ?>
 <div class="card mt-5">
-<ul class="nav">
+    <ul class="nav nav-pills">
         <li class="nav-item">
-            <a class="nav-link active" href="view_book.php">Data</a>
+            <a class="nav-link" href="view_book.php">Data</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="kategori.php">Kategori</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="catalog.php">Katalog</a>
+            <a class="nav-link active" href="catalog.php">Katalog</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="show_cart.php">Keranjang</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="order.php">Order</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="statistik.php">Statistik</a>
@@ -28,7 +31,6 @@
                 <th>Action</th>
             </tr>
             <?php
-            // Include our login information
             require_once('./lib/db_login.php');
 
             // TODO 1: Tuliskan dan eksekusi query
