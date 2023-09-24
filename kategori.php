@@ -17,12 +17,15 @@
             <a class="nav-link" href="show_cart.php">Keranjang</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="order.php">Order</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="statistik.php">Statistik</a>
         </li>
     </ul>
     <div class="card-header">Data Kategories</div>
     <div class="card-body">
-        <table class="table table-bordered">
+        <table class="table table-striped table-bordered">
             <tr>
                 <th>Category</th>
                 <th>ISBN</th>
@@ -59,8 +62,6 @@
                     echo '</tr>';
                 }
             }
-
-            
             ?>
         </table>
         <br />

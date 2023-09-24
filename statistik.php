@@ -18,6 +18,9 @@
             <a class="nav-link" href="show_cart.php">Keranjang</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="order.php">Order</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="statistik.php">Statistik</a>
         </li>
     </ul>
@@ -180,14 +183,14 @@
                     marker: {
                         dataLabel: {
                             visible: true,
-                            position: 'Top',
+                            position: 'Bottom',
                             font: {
                                 fontWeight: '600',
                                 size: '16px',
                             },
                         }
                     },
-                    fill: '#ff5722'
+                    fill: '#A4D0FF'
                 }],
                 legendSettings: {
                     visible: false

@@ -1,7 +1,4 @@
 <?php
-// File         : show_cart.php
-// Deskripsi    : Untuk menambahkan item ke shopping cart dan menampilkan isi shopping cart
-
 session_start();
 error_reporting(0);
 
@@ -18,8 +15,44 @@ if ($id != '') {
     }
 }
 ?>
+
 <?php include('./header.php') ?>
-    
+
+<?php
+if (isset($_POST['submit'])) {
+    require_once('./lib/db_login.php');
+    $sum_qty = 0;
+    $sum_price = 0;
+
+    if (is_array($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $isbn => $qty) {
+            // Lakukan query untuk memasukkan data ke dalam tabel order_items
+            $query = "INSERT INTO order_items (isbn, quantity) VALUES ('$isbn', '$qty');";
+            $result = $db->query($query);
+
+            if (!$result) {
+                die("Could not query the database: <br />" . $db->error . "<br>Query: " . $query);
+            }
+
+            // Hitung jumlah total item dan harga total
+            $sum_qty += $qty;
+            $query = "SELECT price FROM books WHERE isbn = '$isbn'";
+            $result = $db->query($query);
+            $row = $result->fetch_assoc();
+            $sum_price += $row['price'] * $qty;
+        }
+
+        // Setelah selesai memasukkan semua data, Anda dapat mengosongkan session cart jika diperlukan.
+        unset($_SESSION['cart']);
+
+        // Jika perlu, Anda dapat mengarahkan pengguna ke halaman "success.php" atau halaman lain yang sesuai.
+        header('Location: success.php');
+    }
+
+    // Tutup koneksi database jika sudah tidak digunakan.
+    $db->close();
+}
+?>
 
 <br>
 <div class="card mt-4">
@@ -35,6 +68,9 @@ if ($id != '') {
         </li>
         <li class="nav-item">
             <a class="nav-link" href="show_cart.php">Keranjang</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="order.php">Order</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="statistik.php">Statistik</a>
@@ -57,9 +93,8 @@ if ($id != '') {
             $sum_qty = 0;
             $sum_price = 0;
 
-            if (is_array($_SESSION['cart'])) {
+            if (is_array($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 foreach ($_SESSION['cart'] as $id => $qty) {
-
                     // TODO 1: Tuliskan dan eksekusi query
                     $query = "SELECT * FROM books WHERE isbn='$id'";
                     $result = $db->query($query);
@@ -81,17 +116,25 @@ if ($id != '') {
                         $sum_price = $sum_price + ($row->price * $qty);
                     }
                 }
-                echo '<tr><td></td><td></td><td></td><td></td><td></td><td>$' . $sum_price . '</td>';
-                $result->free();
-                $db->close();
-            } else {
+            }
+            
+            if (empty($_SESSION['cart'])) {
                 echo '<tr><td colspan="6" align="center">There is no item in shopping cart</td></tr>';
             }
             ?>
         </table>
         Total items = <?php echo $sum_qty ?><br><br>
-        <a class="btn btn-primary" href="catalog.php">Continue Shopping</a>
-        <a class="btn btn-danger" href="delete_cart.php">Empty Cart</a>
+        <div class="d-flex justify-content-between">
+            <div>
+                <a class="btn btn-primary" href="catalog.php">Continue Shopping</a>
+                <a class="btn btn-danger" href="delete_cart.php">Empty Cart</a>
+            </div>
+            <div>
+                <form method="POST">
+                    <button class="btn btn-success" name="submit" type="submit">Checkout</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <?php include('./footer.php') ?>

@@ -14,6 +14,9 @@
             <a class="nav-link" href="show_cart.php">Keranjang</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="order.php">Order</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="statistik.php">Statistik</a>
         </li>
     </ul>

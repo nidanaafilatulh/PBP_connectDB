@@ -37,7 +37,8 @@ if (!isset($_POST["submit"]))  {
 <?php include('./header.php') ?>
 <br>
 <div class="card mt-4">
-    <div class="card-header">Delete Book Data</div>
+    <div class="card-header text-danger">Apakah anda yakin ingin Menghapus data ini?</div>
+        
     <div class="card-body">
         <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) . '?isbn=' . $isbn ?>" method="POST" autocomplete="on">
             <div class="form-group">
